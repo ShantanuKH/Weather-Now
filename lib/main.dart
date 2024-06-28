@@ -18,6 +18,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'WeatherNow',
         home: FutureBuilder(
+
+          // This determine position is for taking the permission from the user about their location
           future: _determinePosition(),
           builder: (context, snap) {
             if (snap.hasData) {

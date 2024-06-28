@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_app/data/mydata.dart';
+
 part 'weather_bloc_event.dart';
 part 'weather_bloc_state.dart';
 
@@ -12,12 +13,14 @@ class WeatherBlocBloc extends Bloc<WeatherBlocEvent, WeatherBlocState> {
       emit(WeatherBlocLoading());
       try {
         WeatherFactory wf =
-            WeatherFactory("WEATHER_NOW_API_KEY", language: Language.ENGLISH);
-
-        Weather weather = await wf.currentWeatherByLocation(
-            event.position.latitude,
-            event.position.longitude);
-        print(weather);
+            WeatherFactory(API_KEY, language: Language.ENGLISH);
+            Position position = await Geolocator.getCurrentPosition();
+        Weather weather =
+            await wf.currentWeatherByLocation(
+              position.latitude, 
+              position.longitude
+              );
+              print(weather);
         emit(WeatherBlocSuccess(weather));
       } catch (e) {
         emit(WeatherBlocFailure());
