@@ -1,1 +1,0 @@
-String WEATHER_NOW_API_KEY = "a87b59d5a7f3d6641e50a8ebd35b9a2e";
